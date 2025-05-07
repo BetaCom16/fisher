@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sheasepherd.fisher.entitys.Geisternetz;
 import sheasepherd.fisher.repositorys.GeisternetzRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Controller
 public class GeisternetzController {
+
+    Date currentTime = new Date();
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
     @Autowired
     private GeisternetzRepository geisternetzRepository;
@@ -23,21 +29,25 @@ public class GeisternetzController {
     @PostMapping("/melden")
     public String verarbeiteFormular(
         @RequestParam("latitude") double latitude,
-        @RequestParam("longtitude") double longtitude,
+        @RequestParam("longitude") double longitude,
         @RequestParam("groesse") String groesse,
+        //@RequestParam(value = "anonym", required = false, defaultValue = "false") boolean anonym,
         Model model){
-
-            System.out.println("Geisternetz gemeldet: " + groesse + ", " + latitude + ", " + longtitude);
-
-            model.addAttribute("latitude", latitude);
-            model.addAttribute("longtitude", longtitude);
-            model.addAttribute("groesse", groesse);
 
             Geisternetz geisternetz = new Geisternetz();
             geisternetz.setLatitude(latitude);
-            geisternetz.setLongitude(longtitude);
+            geisternetz.setLongitude(longitude);
             geisternetz.setSize(groesse);
+            //geisternetz.setAnonym(anonym);
+            geisternetz.setDate(dateFormatter.format(currentTime));
             geisternetzRepository.save(geisternetz);
+
+            System.out.println("Geisternetz gemeldet: " + groesse + ", " + latitude + ", " + longitude);
+
+            model.addAttribute("latitude", latitude);
+            model.addAttribute("longitude", longitude);
+            model.addAttribute("groesse", groesse);
+            model.addAttribute("date", geisternetz.getDate());
 
             return "bestaetigung";
     }

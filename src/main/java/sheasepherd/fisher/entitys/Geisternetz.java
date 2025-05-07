@@ -1,9 +1,6 @@
 package sheasepherd.fisher.entitys;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Geisternetz {
@@ -15,6 +12,10 @@ public class Geisternetz {
     private double longitude;
     private String size;
     private String status;
+    private String date;
+
+    @Column(nullable = true)
+    private Boolean anonym;
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
@@ -28,6 +29,13 @@ public class Geisternetz {
     public void setStatus(String status){
         this.status = status;
     }
+    public void setDate(String date){
+        this.date = date;
+    }
+    public void setAnonym(Boolean anonym){
+        this.anonym = anonym;
+    }
+
     public double getLatitude() {
         return latitude;
     }
@@ -39,6 +47,15 @@ public class Geisternetz {
     }
     public String getStatus(){
         return status;
+    }
+    public int getId(){
+        return id;
+    }
+    public String getDate(){
+        return date;
+    }
+    public Boolean getAnonym() {
+        return anonym;
     }
 
 }
