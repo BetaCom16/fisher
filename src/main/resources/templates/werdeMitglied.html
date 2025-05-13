@@ -8,10 +8,46 @@
 
     <div th:replace="fragments/menubar :: menubar"></div>
 
-    <div class="container text-center">
+    <div class="container mt-5">
 
-        <h2>Werde ein Teil von uns</h2>
+        <h2>Registriere dich - und werde ein Teil von uns</h2>
 
+        <form th:action="@{werdeMitglied}" th:object="${mitglied}" method="post">
+            <div class="mb-3">
+                <label for="vorname" class="form-label">Vorname:</label>
+                <input type="text" th:field="*{vorname}" id="vorname" name="vorname" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="nachname" class="form-label">Nachname:</label>
+                <input type="text" th:field="*{nachname}" id="nachname" name="nachname" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefonnummer" class="form-label">Telefonnummer:</label>
+                <input type="text" th:field="*{telefonnummer}" id="telefonnummer" name="telefonnummer" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-Mail:</label>
+                <input type="text" th:field="*{email}" id="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="passwort" class="form-label">Passwort:</label>
+                <input type="password" th:field="*{passwort}" id="passwort" name="passwort" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="rolle" class="form-label">Rolle:</label>
+                <input type="text" th:field="*{rolle}" id="rolle" name="rolle" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrieren</button>
+            <a href="/login" class="btn btn-secondary">Bereits Mitglied?</a>
+        </form>
+
+        <div th:if="${error}">[[${error}]]</div>
 
     </div>
 
