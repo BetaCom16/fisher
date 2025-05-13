@@ -26,6 +26,11 @@ public class GeisternetzController {
         return "melden";
     }
 
+    @PostMapping("/gemeldeteGeisternetze")
+    public String zeigeGemeldeteGeisternetze(){
+        return "gemeldeteGeisternetze";
+    }
+
     @PostMapping("/melden")
     public String verarbeiteFormular(
         @RequestParam("latitude") double latitude,
