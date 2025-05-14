@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div th:replace="~{fragments/menubar :: menubar}"></div>
+
+    <div class="container mt-5">
+        <h1>Login</h1>
+
+        <form th:action="@{/login}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">E-Mail:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Passwort:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Anmelden</button>
+            <a href="/werdeMitglied" class="btn btn-secondary">Noch nicht registriert?</a>
+        </form>
+
+        <div th:if="${param.error}">
+            <div class="alert alert-danger mt-3">
+                E-Mail oder Passwort falsch!
+            </div>
+        </div>
+
+        <div th:if="${param.logout}">
+            <div class="alert alert-success mt-3">
+                Erfolgreich ausgeloggt!
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
