@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <div th:replace="fragments/menubar :: menubar"></div>
+    <div th:replace="~{fragments/menubar :: menubar}"></div>
 
     <div class="container text-center">
 
@@ -17,14 +17,14 @@
                 <th scope="col">ID</th>
                 <th scope="col">Längengrad</th>
                 <th scope="col">Breitengrad</th>
-                <!--<th scope="col">Gemeldet von</th>-->
+                <th scope="col">Status</th>
                 <th scope="col">Meldedatum</th>
             </tr>
             <tr th:each="netz :${geisternetze}">
                 <td th:text="${netz.id}"></td>
                 <td th:text="${netz.latitude}"></td>
                 <td th:text="${netz.longitude}"></td>
-                <!--<td th:text="${netz.anonym}"></td>-->
+                <td th:text="${netz.status}"></td>
                 <td th:text="${netz.date}"></td>
             </tr>
         </table>
