@@ -36,15 +36,16 @@ public class GeisternetzController {
         @RequestParam("latitude") double latitude,
         @RequestParam("longitude") double longitude,
         @RequestParam("groesse") String groesse,
-        //@RequestParam(value = "anonym", required = false, defaultValue = "false") boolean anonym,
         Model model){
 
             Geisternetz geisternetz = new Geisternetz();
+
             geisternetz.setLatitude(latitude);
             geisternetz.setLongitude(longitude);
             geisternetz.setSize(groesse);
-            //geisternetz.setAnonym(anonym);
+            geisternetz.setStatus("Gemeldet");
             geisternetz.setDate(dateFormatter.format(currentTime));
+
             geisternetzRepository.save(geisternetz);
 
             System.out.println("Geisternetz gemeldet: " + groesse + ", " + latitude + ", " + longitude);
