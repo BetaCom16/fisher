@@ -1,17 +1,19 @@
 <!Doctype html>
-<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Shea Sepherd Organisation</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
 
-    <div th:replace="fragments/menubar :: menubar"></div>
+    <div th:replace="~{fragments/menubar :: menubar}"></div>
 
     <div class="container text-center">
 
         <h2>Willkommen</h2>
-
+        <p sec:authorize="isAuthenticated()">
+            Angemeldet als: <span sec:authentication="name"></span>
+        </p>
 
     </div>
 
