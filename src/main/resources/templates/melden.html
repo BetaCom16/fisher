@@ -6,31 +6,29 @@
 </head>
 <body>
 
-    <div th:replace="fragments/menubar :: menubar"></div>
+    <div th:replace="~{fragments/menubar :: menubar}"></div>
 
     <div class="container mt-5">
         <h1>Geisternetz melden</h1>
 
         <form th:action="@{/melden}" method="post">
             <div class="mb-3">
-                <label for="latitude" class="form-label">Breitgrad (Latitude):</label>
+                <label for="latitude" class="form-label">Breitgrad (0 - 90):</label>
                 <input type="text" id="latitude" name="latitude" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="longitude" class="form-label">Längengrad (Longitude):</label>
+                <label for="longitude" class="form-label">Längengrad (0 - 180):</label>
                 <input type="text" id="longitude" name="longitude" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="groesse" class="form-label">Größe:</label>
-                <input type="text" id="groesse" name="groesse" class="form-control" required>
+                <select class="form-select" id="groesse" name="groesse" required>
+                    <option selected>Größe auswählen</option>
+                    <option value="Klein">Klein (bis zu 2x2m)</option>
+                    <option value="Mittel">Mittel (ca. 5x5m)</option>
+                    <option value="Groß">Groß (ca. 10x10m)</option>
+                    <option value="Riesig">Riesig (Über 10x10m)</option>
+                </select>
             </div>
-
-            <!--
-            <div class="mb-3">
-                <label for="anonym" class="form-check-label">Anonym:</label>
-                <input type="checkbox" id="anonym" name="anonym" class="form-check-input">
-            </div>
-            -->
 
             <button type="submit" class="btn btn-primary">Melden</button>
             <button type="reset" class="btn btn-danger">Felder leeren</button>
