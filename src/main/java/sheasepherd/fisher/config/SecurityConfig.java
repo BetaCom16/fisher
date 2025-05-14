@@ -1,8 +1,10 @@
 package sheasepherd.fisher.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +14,7 @@ import sheasepherd.fisher.entitys.Mitglied;
 import sheasepherd.fisher.services.MitgliedService;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final MitgliedService mitgliedService;
@@ -28,7 +31,7 @@ public class SecurityConfig {
             return org.springframework.security.core.userdetails.User
                     .withUsername(mitglied.getEmail())
                     .password(mitglied.getPasswort())
-                    .roles("USER")
+                    //.roles(mitglied.getRolle())
                     .build();
         };
     }
@@ -39,15 +42,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/melden", "/gemeldeteGeisternetze",
                                 "/aktuelles", "/werdeMitglied", "/kontakt",
-                                "/test", "/register", "/h2-console/**",
+                                "/test", "/login", "/register", "/h2-console/**",
                                 "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/welcome", true)
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll());
+
 
         //Für H2 Testzwecke
         http.headers().frameOptions().sameOrigin();
