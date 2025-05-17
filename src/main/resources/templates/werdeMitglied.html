@@ -14,14 +14,15 @@
 
         <form th:action="@{werdeMitglied}" th:object="${mitglied}" method="post">
             <div class="mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rolle" id="rolleMelder" value="Melder" checked>
-                    <label class="form-check-label" for="rolleMelder">Melder</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rolle" id="rolleBerger" value="Berger">
-                    <label class="form-check-label" for="rolleBerger" >Berger</label>
-                </div>
+                <label>Welche Funktion möchtest du haben?</label>
+
+                <input type="radio" class="btn-check" id="rolleMelder" name="rolle" value="Melder" checked>
+                <label for="rolleMelder" class="btn btn-primary">Melder</label>
+
+                <input type="radio" class="btn-check" id="rolleBerger" name="rolle" value="Berger">
+                <label for="rolleBerger" class="btn btn-primary">Berger</label>
+
+
             </div>
             <div class="mb-3">
                 <label for="vorname" class="form-label">Vorname:</label>
