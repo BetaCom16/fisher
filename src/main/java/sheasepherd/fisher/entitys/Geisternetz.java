@@ -14,6 +14,10 @@ public class Geisternetz {
     private String status;
     private String date;
 
+    @ManyToOne
+    @JoinColumn(name = "mitglied_id")
+    private Mitglied meldendePerson;
+
     @Column(nullable = true)
     private Boolean anonym;
 
@@ -34,6 +38,9 @@ public class Geisternetz {
     }
     public void setAnonym(Boolean anonym){
         this.anonym = anonym;
+    }
+    public void setMeldendePerson(Mitglied meldendePerson){
+        this.meldendePerson = meldendePerson;
     }
 
     public double getLatitude() {
@@ -56,6 +63,9 @@ public class Geisternetz {
     }
     public Boolean getAnonym() {
         return anonym;
+    }
+    public Mitglied getMeldendePerson() {
+        return meldendePerson;
     }
 
 }
