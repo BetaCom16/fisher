@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import sheasepherd.fisher.entitys.Mitglied;
 import sheasepherd.fisher.services.MitgliedService;
@@ -40,10 +38,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/melden", "/gemeldeteGeisternetze",
-                                "/aktuelles", "/werdeMitglied", "/kontakt",
-                                "/test", "/login", "/register", "/h2-console/**",
-                                "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/melden", "/bestaetigung", "/gemeldeteGeisternetze",
+                                "/aktuelles", "/werdeMitglied", "/kontakt", "/test",
+                                "/login", "/register", "/h2-console/**", "/css/**",
+                                "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
