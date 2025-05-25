@@ -9,21 +9,19 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
+
                     <a class="nav-link" href="/">Startseite</a>
                     <a class="nav-link" href="/aktuelles">Aktuelles</a>
-                    <a class="nav-link" href="/login">Login</a>
-                    <a class="nav-link" href="/werdeMitglied">Mitglied werden</a>
+                    <a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Login</a>
+                    <a class="nav-link" href="/werdeMitglied" sec:authorize="!isAuthenticated()">Mitglied werden</a>
                     <a class="nav-link" href="/gemeldeteGeisternetze">Gemeldete Geisternetze</a>
                     <a class="nav-link" href="/melden">Geisternetz melden</a>
+
+
+                    <!--Nav-Items sichtbar nach erfolgreicher Anmeldung -->
+                    <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
+
                     <a class="nav-link" href="/kontakt">Kontakt</a>
-
-                    <li sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/test">Test</a>
-                    </li>
-
-                    <li sec:authorize="isAuthenticated()">
-                        <a class="nav-link" th:href="@{/logout}">Logout</a>
-                    </li>
 
                 </div>
             </div>
