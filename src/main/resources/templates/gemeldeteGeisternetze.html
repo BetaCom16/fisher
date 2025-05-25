@@ -19,6 +19,8 @@
                 <th scope="col">Breitengrad</th>
                 <th scope="col">Status</th>
                 <th scope="col">Meldedatum</th>
+                <th scope="col">Name</th>
+                <th scope="col">Telefonnummer</th>
             </tr>
             <tr th:each="netz :${geisternetze}">
                 <td th:text="${netz.id}"></td>
@@ -26,6 +28,16 @@
                 <td th:text="${netz.longitude}"></td>
                 <td th:text="${netz.status}"></td>
                 <td th:text="${netz.date}"></td>
+
+                <td th:if="${netz.anonym == false and netz.meldendePerson != null}"
+                    th:text="${netz.meldendePerson.vorname + ' ' + netz.meldendePerson.nachname}">
+                </td>
+                <td th:if="${netz.anonym == false and netz.meldendePerson != null}"
+                    th:text="${netz.meldendePerson.telefonnummer}">
+                </td>
+
+                <td th:if="${netz.anonym == true}" colspan="2">Anonym gemeldet</td>
+
             </tr>
         </table>
 
