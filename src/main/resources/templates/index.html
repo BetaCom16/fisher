@@ -6,18 +6,99 @@
 </head>
 <body>
 
-    <div th:replace="~{fragments/menubar :: menubar}"></div>
+<div th:replace="~{fragments/menubar :: menubar}"></div>
 
-    <div class="container text-center">
+<div class="container text-center">
+    <div class="row">
 
-        <h2>Willkommen</h2>
+        <br>
+
         <p sec:authorize="isAuthenticated()">
             Angemeldet als: <span sec:authentication="name"></span>
         </p>
-
     </div>
+    <div class="row">
+        <div class="col">
+
+            <img th:src="@{/images/sheaSepherdLogo.png}" class="img-fluid"/>
+
+        </div>
+        <div class="col">
+
+            <p class="fs-3">Shea Sepherd – Gemeinsam für saubere Meere</p>
+
+            <p>
+                Willkommen bei Shea Sepherd, einer gemeinnützigen Organisation, die sich leidenschaftlich dem Schutz unserer Ozeane verschrieben hat. Wir bekämpfen
+                eine unsichtbare Gefahr, die unsere Meere und ihre Bewohner bedroht: <b>Geisternetze</b>. Dies sind Fischernetze, die im Meer verloren gegangen oder
+                absichtlich zurückgelassen wurden und über Jahrzehnte hinweg zur <b>tödlichen Falle</b> für Fische, Meeressäuger und Seevögel werden.
+            </p>
+
+            <hr>
+
+            <p class="fs-3">Unsere Mission: Orten, Bergen, Schützen</p>
+            <p>
+                Bei Shea Shepherd glauben wir an die Kraft der Gemeinschaft. Wir arbeiten eng mit Fischern, Tauchern und engagierten Freiwilligen zusammen, um
+                diese heimtückischen Netze zu finden und zu bergen. Unser Ansatz ist koordiniert und effizient:
+            </p>
+
+            <p>
+                <b>Ortung:</b> Fischer und Freiwillige melden uns über unser Portal die Standorte von Geisternetzen. Ihre Kenntnisse der lokalen Gewässer sind
+                dabei von unschätzbarem Wert.
+
+                <br><br>
+
+                <b>Dokumentation:</b> Die gemeldeten Funde werden auf unserem Portal erfasst und öffentlich gemacht, um Transparenz zu schaffen und weitere Helfer
+                zu mobilisieren.
+
+                <br><br>
+
+                <b>Bergung:</b> Erfahrene Taucherteams und Bergungsspezialisten rücken aus, um die Geisternetze professionell und sicher aus dem Meer zu holen.                             <br><br>
+            </p>
+
+            <hr>
+
+            <p class="fs-3">Warum das wichtig ist</p>
+
+            <p>
+                Geisternetze sind eine Umweltkatastrophe. Sie verfangen und töten unzählige Meerestiere, beschädigen Korallenriffe und andere empfindliche
+                Ökosysteme und tragen zur Plastikverschmutzung bei, wenn sie mit der Zeit in Mikroplastik zerfallen. Durch unsere Arbeit tragen wir aktiv
+                dazu bei:
+            </p>
+
+            <p>
+                <b>Die marine Tierwelt zu schützen:</b> Wir befreien Tiere aus den Netzen und verhindern, dass weitere Opfer hinzukommen.
+
+                <br><br>
+
+                <b>Die Meere zu reinigen:</b> Wir entfernen tonnenweise Plastik und andere Abfälle aus unseren Ozeanen.
+
+                <br><br>
+
+                <b>Das Bewusstsein zu schärfen:</b> Wir informieren über die Gefahren von Geisternetzen und die Bedeutung des Meeresschutzes.
+
+                <br><br>
+            </p>
+
+            <hr>
+
+            <p class="fs-3">Werde Teil der Lösung!</p>
+
+            <p>
+                Shea Shepherd ist mehr als nur eine Organisation – wir sind eine Bewegung. Jeder Einzelne kann einen Unterschied machen.
+                Ob Sie Fischer sind, der uns Geisternetze meldet, ein Taucher, der bei Bergungsaktionen hilft, oder einfach nur jemand,
+                der unsere Mission finanziell unterstützen möchte – Ihre Hilfe ist entscheidend.
+
+                Gemeinsam können wir sicherstellen, dass unsere Ozeane auch für zukünftige Generationen ein lebendiger und gesunder Lebensraum
+                bleiben.
+            </p>
+
+            <p>
+                Du möchtest deinen Beitrag leisten? Dann <a href="werdeMitglied">registriere dich</a> und hilf uns dabei die Meere sauberer zu machen
+                und die Tierwelt zu schützen!
+            </p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
-
-
