@@ -1,6 +1,5 @@
 package sheasepherd.fisher.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import sheasepherd.fisher.entitys.Mitglied;
 import sheasepherd.fisher.services.MitgliedService;
 
@@ -29,7 +29,7 @@ public class SecurityConfig {
             return org.springframework.security.core.userdetails.User
                     .withUsername(mitglied.getEmail())
                     .password(mitglied.getPasswort())
-                    //.roles(mitglied.getRolle())
+                    .roles(mitglied.getRolle())
                     .build();
         };
     }
@@ -38,10 +38,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/melden", "/bestaetigung", "/gemeldeteGeisternetze",
+                        .requestMatchers("/", "/bestaetigung", "/gemeldeteGeisternetze",
                                 "/aktuelles", "/werdeMitglied", "/kontakt", "/test",
                                 "/login", "/register", "/h2-console/**", "/css/**",
                                 "/js/**").permitAll()
+                        .requestMatchers("/bergung", "/meineBergungen", "/netz-als-geborgen", "/netz-freigeben").hasRole("Berger")
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/images/**"),
+                                new AntPathRequestMatcher("/css/**")
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
