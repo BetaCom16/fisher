@@ -13,8 +13,10 @@
         <h2>Registriere dich - und werde ein Teil von uns</h2>
 
         <form th:action="@{werdeMitglied}" th:object="${mitglied}" method="post">
-            <div class="mb-3">
-                <label>Welche Funktion möchtest du haben?</label>
+            <div class="mb-3 text-center">
+                <label>Wähle deine Funktion: </label>
+
+                <br>
 
                 <input type="radio" class="btn-check" id="rolleMelder" name="rolle" value="Melder" checked>
                 <label for="rolleMelder" class="btn btn-primary">Melder</label>
