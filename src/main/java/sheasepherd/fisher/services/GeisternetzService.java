@@ -15,7 +15,7 @@ public class GeisternetzService {
     private GeisternetzRepository geisternetzRepository;
 
     public List<Geisternetz> zeigeAlleGeisternetze(){
-        return geisternetzRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
+        return geisternetzRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
 }

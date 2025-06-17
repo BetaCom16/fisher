@@ -15,6 +15,7 @@ import sheasepherd.fisher.services.MitgliedService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class GeisternetzController {
@@ -76,4 +77,103 @@ public class GeisternetzController {
 
             return "bestaetigung";
     }
+
+    @GetMapping("/bergung")
+    public String zeigeBergbareNetze(Model model) {
+        model.addAttribute("geisternetze", geisternetzRepository.findByStatusAndBergendePersonIsNull("Gemeldet"));
+        return "bergung";
+    }
+
+    @PostMapping("/bergung")
+    public String eintragenZurBergung(@RequestParam("netzId") int netzId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Mitglied mitglied = MitgliedService.findByEmail(auth.getName());
+
+        Geisternetz netz = geisternetzRepository.findById((long) netzId).orElse(null);
+
+        if (mitglied != null && netz != null && netz.getBergendePerson() == null) {
+            netz.setBergendePerson(mitglied);
+            netz.setStatus("Bergung bevorstehend");
+            geisternetzRepository.save(netz);
+        }
+
+        return "redirect:/bergung";
+    }
+
+    @GetMapping("/meineBergungen")
+    public String zeigeEigeneBergungen(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Mitglied mitglied = MitgliedService.findByEmail(auth.getName());
+
+        if (mitglied != null) {
+            List<Geisternetz> eigeneNetze = geisternetzRepository.findByBergendePersonAndStatusNot(mitglied, "Geborgen");
+            model.addAttribute("meineNetze", eigeneNetze);
+        }
+
+        return "meineBergungen";
+    }
+
+    @PostMapping("/netz-als-geborgen")
+    public String alsGeborgenMelden(@RequestParam("netzId") int netzId) {
+        Geisternetz netz = geisternetzRepository.findById((long) netzId).orElse(null);
+
+        if (netz != null && "Bergung bevorstehend".equals(netz.getStatus())) {
+            netz.setStatus("Geborgen");
+            geisternetzRepository.save(netz);
+        }
+
+        return "redirect:/meineBergungen";
+    }
+
+    @GetMapping("/geborgeneNetze")
+    public String zeigeGeborgeneNetze(Model model) {
+        model.addAttribute("geborgeneNetze", geisternetzRepository.findByStatus("Geborgen"));
+        return "geborgeneNetze";
+    }
+
+    @PostMapping("/netz-freigeben")
+    public String bergungAbgeben(@RequestParam("netzId") int netzId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Mitglied mitglied = MitgliedService.findByEmail(auth.getName());
+
+        Geisternetz netz = geisternetzRepository.findById((long) netzId).orElse(null);
+
+        if (netz != null && mitglied != null &&
+                "Bergung bevorstehend".equals(netz.getStatus()) &&
+                mitglied.equals(netz.getBergendePerson())) {
+
+            netz.setBergendePerson(null);
+            netz.setStatus("Gemeldet");
+            geisternetzRepository.save(netz);
+        }
+
+        return "redirect:/meineBergungen";
+    }
+
+    @GetMapping("/verscholleneNetze")
+    public String zeigeVerschollbareNetze(Model model) {
+        System.out.println("Aufruf verschollen-melden");
+        List<Geisternetz> alleNetze = geisternetzRepository.findAll();
+        List<Geisternetz> verfuegbareNetze = alleNetze.stream()
+                .filter(netz -> !"Verschollen".equals(netz.getStatus()) && !"Geborgen".equals(netz.getStatus()))
+                .toList();
+        System.out.println("Gefundene Netze: " + verfuegbareNetze.size());
+        model.addAttribute("netze", verfuegbareNetze);
+        return "verscholleneNetze";
+    }
+
+    @PostMapping("/netz-als-verschollen")
+    public String alsVerschollenMelden(@RequestParam("netzId") long netzId) {
+        Geisternetz netz = geisternetzRepository.findById(netzId).orElse(null);
+
+        if (netz != null && !"Geborgen".equals(netz.getStatus()) && !"Verschollen".equals(netz.getStatus())) {
+                    netz.setStatus("Verschollen");
+                    netz.setBergendePerson(null);
+                    geisternetzRepository.save(netz);
+        }
+
+        return "redirect:/verscholleneNetze";
+    }
+
+
 }

@@ -21,6 +21,18 @@ public class Geisternetz {
     @Column(nullable = true)
     private Boolean anonym;
 
+    @ManyToOne
+    @JoinColumn(name = "bergende_mitglied_id")
+    private Mitglied bergendePerson;
+
+    public Mitglied getBergendePerson() {
+        return bergendePerson;
+    }
+
+    public void setBergendePerson(Mitglied bergendePerson) {
+        this.bergendePerson = bergendePerson;
+    }
+
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }

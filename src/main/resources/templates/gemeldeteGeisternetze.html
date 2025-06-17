@@ -10,18 +10,26 @@
 
     <div class="container text-center">
 
+        <br>
+
         <h2>Gemeldete Geisternetze</h2>
+        <p>Hier sind alle Geisternetze aufgelistet, die jemals von freiwilligen Helfern gemeldet wurden.</p>
+        <p>Dabei werden auch die Netze aufgelistet, die bereits geborgen oder als verschollen gemeldet wurden und die, die noch geborgen werden sollen</p>
+
+        <hr>
 
         <table class="table table-striped">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Längengrad</th>
-                <th scope="col">Breitengrad</th>
-                <th scope="col">Status</th>
-                <th scope="col">Meldedatum</th>
-                <th scope="col">Name</th>
-                <th scope="col">Telefonnummer</th>
-            </tr>
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Längengrad</th>
+                    <th scope="col">Breitengrad</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Meldedatum</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Telefonnummer</th>
+                </tr>
+            </thead>
             <tr th:each="netz :${geisternetze}">
                 <td th:text="${netz.id}"></td>
                 <td th:text="${netz.latitude}"></td>
