@@ -1,9 +1,6 @@
 package sheasepherd.fisher.entitys;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Mitglied {
@@ -17,6 +14,17 @@ public class Mitglied {
     private String email;
     private String rolle;
     private String passwort;
+
+    @ManyToOne
+    @JoinColumn(name = "bergende_mitglied_id")
+    private Mitglied bergendePerson;
+
+    public Mitglied getBergendePerson() {
+        return bergendePerson;
+    }
+    public void setBergendePerson(Mitglied bergendePerson) {
+        this.bergendePerson = bergendePerson;
+    }
 
     public void setVorname(String vorname) {
         this.vorname = vorname;
