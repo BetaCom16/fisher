@@ -26,7 +26,7 @@ public class MitgliedController {
     public String registrieMitglied(@ModelAttribute Mitglied mitglied, Model model){
         if(mitgliedService.findByEmail(mitglied.getEmail()) != null){
             model.addAttribute("error", "Email bereits vergeben");
-            return "register";
+            return "werdeMitglied";
         }
         mitgliedService.save(mitglied);
         return "redirect:/login";
