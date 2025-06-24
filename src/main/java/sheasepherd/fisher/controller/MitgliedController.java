@@ -32,11 +32,4 @@ public class MitgliedController {
         return "redirect:/login";
     }
 
-    @GetMapping("/welcome")
-    public String welcome(){
-        return "welcome";
-    }
-
-
-
 }

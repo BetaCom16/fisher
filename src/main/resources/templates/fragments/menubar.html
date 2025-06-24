@@ -17,7 +17,6 @@
             <a class="nav-link" href="/">Startseite</a>
             <a class="nav-link" href="/aktuelles">Aktuelles</a>
             <a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Login/Registrieren</a>
-            <!--<a class="nav-link" href="/werdeMitglied" sec:authorize="!isAuthenticated()">Mitglied werden</a>-->
 
             <a class="nav-link" sec:authorize="isAuthenticated()" href="/melden">Neues Geisternetz melden</a>
 
@@ -29,11 +28,12 @@
             <a class="nav-link" sec:authorize="isAuthenticated()" href="/geborgeneNetze">Geborgene Netze</a>
             <a class="nav-link" sec:authorize="isAuthenticated()" href="/verscholleneNetze">Verschollenes Netz melden</a>
 
+            <a class="nav-link" href="/kontakt">Kontakt</a>
+
             <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display:inline;">
                 <button type="submit" class="nav-link btn btn-link">Logout</button>
             </form>
 
-            <a class="nav-link" href="/kontakt">Kontakt</a>
         </div>
     </nav>
 </div>
